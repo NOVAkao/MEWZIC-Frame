@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "author": "ESP32 Spotify Controller",
+  "editor": "wokwi",
+
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": -50,
+      "attrs": {}
+    },
+    {
+      "type": "board-epaper-2in9",
+      "id": "epd1",
+      "top": -20,
+      "left": 300,
+      "attrs": {
+        "version": "2",
+        "actMode": "1",
+        "debug": "1",
+        "debugMask": "255"
+      }
+    },
+    {
+      "type": "wokwi-ds1307",
+      "id": "rtc",
+      "top": 350,
+      "left": 300,
+      "attrs": {
+        "initTime": "2020-08-19T17:00:00"
+      }
+    },
+    {
+      "type": "wokwi-ky-040",
+      "id": "encoder",
+      "top": 500,
+      "left": 50,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnForward",
+      "top": -100,
+      "left": -250,
+      "attrs": {
+        "label": "Forward"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnBackward",
+      "top": 10,
+      "left": -260,
+      "attrs": {
+        "label": "Backward"
+      }
+    }
+  ],
+
+  "connections": [
+    ["esp:TX0", "$serialMonitor:RX", "", []],
+    ["esp:RX0", "$serialMonitor:TX", "", []],
+
+    ["epd1:VCC", "esp:3V3", "red", ["h-20", "v-40"]],
+    ["epd1:GND", "esp:GND.2", "black", ["h-30", "v-30"]],
+    ["epd1:DIN", "esp:D23", "orange", ["h-40", "v50"]],
+    ["epd1:CLK", "esp:D18", "green", ["h-50", "v40"]],
+    ["epd1:CS", "esp:D5", "violet", ["h-60", "v30"]],
+    ["epd1:DC", "esp:TX2", "yellow", ["h-70", "v20"]],
+    ["epd1:RST", "esp:RX2", "blue", ["h-80", "v10"]],
+    ["epd1:BUSY", "esp:D4", "cyan", ["h-90", "v0"]],
+
+
+    ["rtc:5V", "esp:3V3", "red", ["v-50", "h-40", "v-300"]],
+    ["rtc:GND", "esp:GND.2", "black", [ "h-180", "v-300"]],
+    ["rtc:SDA", "esp:D21", "green", [ "h-190", "v-300"]],
+    ["rtc:SCL", "esp:D22", "green", ["h-200", "v-300"]],
+
+    
+    ["encoder:VCC", "esp:3V3", "red", ["h30","v-200"]],
+    ["encoder:GND", "esp:GND.2", "black", ["h-210","v-40"]],
+    ["encoder:CLK", "esp:D32", "green", ["h-250", "v-290"]],
+    ["encoder:DT", "esp:D33", "green", ["h-270", "v-300"]],
+    ["encoder:SW", "esp:D27", "green", ["h-225", "v-300"]],
+
+    ["btnForward:1.l", "esp:D26", "green", ["h-20", "v-20"]],
+    ["btnForward:2.l", "esp:GND.2", "black", ["h-20", "v-20"]],
+
+    ["btnBackward:1.l", "esp:D25", "green", ["h-20", "v-20"]],
+    ["btnBackward:2.l", "esp:GND.2", "black", ["h-20", "v-20"]]
+
+  ],
+
+  "dependencies": {}
+}

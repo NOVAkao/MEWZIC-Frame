@@ -1,0 +1,5 @@
+[wokwi]
+version = 1
+
+firmware = 'build/esp32_spotify_controller.bin'
+elf = 'build/esp32_spotify_controller.elf'
